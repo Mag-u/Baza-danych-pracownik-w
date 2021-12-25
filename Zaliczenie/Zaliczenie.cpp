@@ -12,9 +12,19 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 
 int main()
 {
+    fstream liczbaUruchomien;
+    liczbaUruchomien.open("uruchomienia.txt");
+    int liczba;
+    liczbaUruchomien >> liczba;
+    liczba = liczba+1;
+    liczbaUruchomien << 2;
+    cout << liczba;
+    liczbaUruchomien.close();
+
 
 }
