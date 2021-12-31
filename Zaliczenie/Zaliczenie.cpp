@@ -1,30 +1,36 @@
-﻿// Napisać program, który utworzy adresową bazę danych(osoba - imię(imiona) i nazwisko(nazwiska),
-// kod, miejscowość, kraj, ulica, numer) i będzie ją obsługiwać(dopisywanie, korekta, kasowanie)
-// STRUCT
-// 
-// oraz sortować według uznania użytkownika algorytmem bąbelkowym.          
-// 
-// Program napisać tak, aby: aby po uruchomieniu była wyświetlana informacja,
-// który raz program został uruchomiony.
-// Stworzyc plik tekstowy z liczba zero, wczytywac ten plik za kazdym razem i dodawac jeden.
-// Wczytaj plik dodaj jeden wyswietl liczbe
-
-
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 #include <string>
 using namespace std;
 
 int main()
 {
-    fstream liczbaUruchomien;
-    liczbaUruchomien.open("uruchomienia.txt");
-    int liczba;
-    liczbaUruchomien >> liczba;
-    liczba = liczba+1;
-    liczbaUruchomien << 2;
-    cout << liczba;
-    liczbaUruchomien.close();
+    string liczbaUruchomien;
+    ifstream liczba{ "uruchomienia.txt" };
+    ofstream liczbaOPlus1{ "uruchomieniaO1Plus.txt" };
+    if (liczba && liczbaOPlus1) {
 
+        while (getline(liczba, liczbaUruchomien))
+        {
+            int numer = stoi(liczbaUruchomien);
+            numer += 1;
+            liczbaOPlus1 << numer;
+        }
+    }
+    liczba.close();
+    liczbaOPlus1.close();
 
+    string liczbaZwiekszonaO1KtoraTerazJestPrawidlowa;
+    ifstream liczbaZPlus1{ "uruchomieniaO1Plus.txt" };
+    ofstream liczbaTerazNormalna{ "uruchomienia.txt" };
+
+    if (liczbaZPlus1 && liczbaTerazNormalna) {
+
+        while (getline(liczbaZPlus1, liczbaZwiekszonaO1KtoraTerazJestPrawidlowa)) {
+            liczbaTerazNormalna << liczbaZwiekszonaO1KtoraTerazJestPrawidlowa;
+        }
+    }
+    liczbaZPlus1.close();
+    liczbaTerazNormalna.close();
+    return 0;
 }
