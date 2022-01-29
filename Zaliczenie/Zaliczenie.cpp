@@ -3,6 +3,34 @@
 #include <string>
 #include <vector>
 using namespace std;
+void sortowanieBabelkowe(vector <string>& bazaDanych)
+{
+    string alfabetycznieLubNie;
+    cout << "W jaki sposob chcesz posortowac? alfabetycznie czy niealfabetycznie? a/n: ";
+    cin >> alfabetycznieLubNie;
+    if (alfabetycznieLubNie == "a")
+    {
+        for (int i = 0; i < bazaDanych.size(); i++)
+            {
+                for (int j = 0; j < bazaDanych.size() - 1; j++)
+                {
+                if (bazaDanych[j] > bazaDanych[j + 1])
+                swap(bazaDanych[j], bazaDanych[j + 1]);
+                }
+            }
+    }
+    else
+    {
+        for (int i = 0; i < bazaDanych.size(); i++)
+        {
+            for (int j = 0; j < bazaDanych.size() - 1; j++)
+            {
+                if (bazaDanych[j] < bazaDanych[j + 1])
+                    swap(bazaDanych[j], bazaDanych[j + 1]);
+            }
+        }
+    }
+}
 string dopisz(int iTakNiePotrzbny)
 {
     string sklejanka;
@@ -63,9 +91,9 @@ string korektaDanych(vector <string> dane, int cyfra)
     string nazwisko = ulepszonyVector[1];
     string kod = ulepszonyVector[2];
     string miejscowosc = ulepszonyVector[3];
-    string kraj = ulepszonyVector[3];
-    string ulica = ulepszonyVector[4];
-    string numer = ulepszonyVector[5];
+    string kraj = ulepszonyVector[4];
+    string ulica = ulepszonyVector[5];
+    string numer = ulepszonyVector[6];
 
         cout << "Ktore dane chcesz zmienic? ";
         cout << "1. imie"<<endl;
@@ -146,82 +174,86 @@ int main()
     }
     liczbaZPlus1.close();
     liczbaTerazNormalna.close();
-   
-        do {
-            while (powtorzyc == "tak")
-            {
-                cout << "1. Dopisz" << endl;
-                cout << "2. Korekta" << endl;
-                cout << "3. Skasuj" << endl;
-                cout << "4. Pokaz baze" << endl;
-                cout << "5. Sortowanie babelkowe" << endl;
-                cout << "6.Wyjdz" << endl;
-                cout << "Wybierz opcje: ";
+        while (powtorzyc == "tak")
+        {
+            system("CLS");
 
-                cin >> wybor;
+            cout << "1. Dopisz" << endl;
+            cout << "2. Korekta" << endl;
+            cout << "3. Skasuj" << endl;
+            cout << "4. Pokaz baze" << endl;
+            cout << "5. Sortowanie babelkowe" << endl;
+            cout << "6. Wyjdz" << endl;
+            cout << "Wybierz opcje: ";
 
-                system("CLS");
+            cin >> wybor;
 
-                switch (wybor) {
-                case 1:
-                    adresowaBazaDanych.push_back(dopisz(wybor));
-                    cout << endl << "Otworzyc ponownie wybor? tak/nie" << endl;
-                    cin >> powtorzyc;
-                    if(powtorzyc=="nie")
-                    {
-                        exit(0);
-                    }
-                    break;
-                case 2:
-                    cout << "Podaj numer danych ktory chcesz zmienic: ";
-                    cin >> numerDanych; 
-                   kopiaKorekty= korektaDanych(adresowaBazaDanych, numerDanych);
-                    adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerDanych-1);
-                    adresowaBazaDanych.insert(adresowaBazaDanych.begin() + (numerDanych - 1), kopiaKorekty);
-                    cout << "Otworzyc ponownie wybor? tak/nie" << endl;
-                    cin >> powtorzyc;
-                    if (powtorzyc == "nie")
-                    {
-                        exit(0);
-                    }
-                    break;
-                case 3:
-                    cout << "Podaj numer danych ktore chcesz usunac: ";
-                    cin >> numerDanych;
-                    adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerDanych - 1);
-                    cout << "Otworzyc ponownie wybor? tak/nie" << endl;
-                    cin >> powtorzyc;
-                    if (powtorzyc == "nie")
-                    {
-                        exit(0);
-                    }
-                    break;
-                case 4:
-                    for (int i = 0; i < adresowaBazaDanych.size(); i++)
-                    {
-                        cout << i + 1 << " " << adresowaBazaDanych[i] << endl;
-                    }
-                    cout << "Otworzyc ponownie wybor? tak/nie" << endl;
-                    cin >> powtorzyc;
-                    if (powtorzyc == "nie")
-                    {
-                        exit(0);
-                    }
-                    break;
-                case 5:
-                    cout << "Otworzyc ponownie wybor? tak/nie" << endl;
-                    cin >> powtorzyc;
-                    if (powtorzyc == "nie")
-                    {
-                        exit(0);
-                    }
-                default:
-                    cout << "Wybrales bledny nymer sprobuj raz jeszcze";
-                    system("CLS");
-                    break;
+            system("CLS");
+
+            switch (wybor) {
+            case 1:
+                adresowaBazaDanych.push_back(dopisz(wybor));
+                cout << endl << "Otworzyc ponownie wybor? tak/nie" << endl;
+                cin >> powtorzyc;
+                if (powtorzyc == "nie")
+                {
+                    exit(0);
                 }
-                
+                break;
+            case 2:
+                cout << "Podaj numer danych ktory chcesz zmienic: ";
+                cin >> numerDanych;
+                kopiaKorekty = korektaDanych(adresowaBazaDanych, numerDanych);
+                adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerDanych - 1);
+                adresowaBazaDanych.insert(adresowaBazaDanych.begin() + (numerDanych - 1), kopiaKorekty);
+                cout << "Otworzyc ponownie wybor? tak/nie" << endl;
+                cin >> powtorzyc;
+                if (powtorzyc == "nie")
+                {
+                    exit(0);
+                }
+                break;
+            case 3:
+                cout << "Podaj numer danych ktore chcesz usunac: ";
+                cin >> numerDanych;
+                adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerDanych - 1);
+                cout << "Otworzyc ponownie wybor? tak/nie" << endl;
+                cin >> powtorzyc;
+                if (powtorzyc == "nie")
+                {
+                    exit(0);
+                }
+                break;
+            case 4:
+                for (int i = 0; i < adresowaBazaDanych.size(); i++)
+                {
+                    cout << i + 1 << ")" << adresowaBazaDanych[i] << endl;
+                }
+                cout << "Otworzyc ponownie wybor? tak/nie" << endl;
+                cin >> powtorzyc;
+                if (powtorzyc == "nie")
+                {
+                    exit(0);
+                }
+                break;
+            case 5:
+                sortowanieBabelkowe(adresowaBazaDanych);
+                cout << "Sortowanie zostalo wykonane" << endl;
+                 cout << "Otworzyc ponownie wybor? tak/nie" << endl;
+                  cin >> powtorzyc;
+                  if (powtorzyc == "nie")
+                  {
+                      exit(0);
+                  }
+                  break;
+            case 6:
+                exit(0);
+
+            default:
+                cout << "Wybrales bledny numer sprobuj raz jeszcze";
+                system("CLS");
+                break;
             }
-        } while (wybor != 6);
+        }
     return 0;
 }
