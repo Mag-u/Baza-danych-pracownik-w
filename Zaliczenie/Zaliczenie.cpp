@@ -37,7 +37,6 @@ string dopisz(int iTakNiePotrzbny)
     sklejanka += numer+" ";
     return sklejanka;
 }
-
 string korektaDanych(vector <string> dane, int cyfra)
 {
     int wybor = 0;
@@ -69,13 +68,13 @@ string korektaDanych(vector <string> dane, int cyfra)
     string numer = ulepszonyVector[5];
 
         cout << "Ktore dane chcesz zmienic? ";
-        cout << "1. imie";
-        cout << "2. nazwisko";
-        cout << "3. kod";
-        cout << "4. miejscowosc";
-        cout << "5. kraj";
-        cout << "6. ulica";
-        cout << "7. numer";
+        cout << "1. imie"<<endl;
+        cout << "2. nazwisko" << endl;
+        cout << "3. kod" << endl;
+        cout << "4. miejscowosc" << endl;
+        cout << "5. kraj" << endl;
+        cout << "6. ulica" << endl;
+        cout << "7. numer" << endl;
         cin >> wybor;
         system("CLS");
         switch (wybor)
@@ -110,7 +109,6 @@ string korektaDanych(vector <string> dane, int cyfra)
             break;
 
         }
-    /*}*/
     koncowy = imie + " " + nazwisko + " " + kod + " " + miejscowosc + " " + kraj + " " + ulica + " " + numer;
     return koncowy;
 }
@@ -119,6 +117,7 @@ int main()
     int wybor = 0;
     int numerDanych = 0;
     vector <string> adresowaBazaDanych;
+    string kopiaKorekty;
     string powtorzyc = "tak";
     string liczbaUruchomien;
     ifstream liczba{ "uruchomienia.txt" };
@@ -155,7 +154,8 @@ int main()
                 cout << "2. Korekta" << endl;
                 cout << "3. Skasuj" << endl;
                 cout << "4. Pokaz baze" << endl;
-                cout << "5. Wyjdz" << endl;
+                cout << "5. Sortowanie babelkowe" << endl;
+                cout << "6.Wyjdz" << endl;
                 cout << "Wybierz opcje: ";
 
                 cin >> wybor;
@@ -174,8 +174,10 @@ int main()
                     break;
                 case 2:
                     cout << "Podaj numer danych ktory chcesz zmienic: ";
-                    cin >> numerDanych;
-                    korektaDanych(adresowaBazaDanych, numerDanych);
+                    cin >> numerDanych; 
+                   kopiaKorekty= korektaDanych(adresowaBazaDanych, numerDanych);
+                    adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerDanych-1);
+                    adresowaBazaDanych.insert(adresowaBazaDanych.begin() + (numerDanych - 1), kopiaKorekty);
                     cout << "Otworzyc ponownie wybor? tak/nie" << endl;
                     cin >> powtorzyc;
                     if (powtorzyc == "nie")
@@ -184,7 +186,9 @@ int main()
                     }
                     break;
                 case 3:
-                    cout << 3 << endl;
+                    cout << "Podaj numer danych ktore chcesz usunac: ";
+                    cin >> numerDanych;
+                    adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerDanych - 1);
                     cout << "Otworzyc ponownie wybor? tak/nie" << endl;
                     cin >> powtorzyc;
                     if (powtorzyc == "nie")
@@ -204,8 +208,20 @@ int main()
                         exit(0);
                     }
                     break;
+                case 5:
+                    cout << "Otworzyc ponownie wybor? tak/nie" << endl;
+                    cin >> powtorzyc;
+                    if (powtorzyc == "nie")
+                    {
+                        exit(0);
+                    }
+                default:
+                    cout << "Wybrales bledny nymer sprobuj raz jeszcze";
+                    system("CLS");
+                    break;
                 }
+                
             }
-        } while (wybor != 5);
+        } while (wybor != 6);
     return 0;
 }
