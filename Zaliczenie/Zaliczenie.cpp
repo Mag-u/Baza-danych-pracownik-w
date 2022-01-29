@@ -3,20 +3,45 @@
 #include <string>
 #include <vector>
 using namespace std;
+string dopisz(int iTakNiePotrzbny)
+{
+    string sklejanka;
+    string imie;
+    string nazwisko;
+    string kod;
+    string miejscowosc;
+    string kraj;
+    string ulica;
+    string numer;
 
+    cout << "Podaj imie: ";
+    cin >> imie;
+    sklejanka = imie + " ";
+    cout << "Podaj nazwisko: ";
+    cin >> nazwisko;
+    sklejanka += nazwisko +" ";
+    cout << "Podaj kod: ";
+    cin >> kod;
+    sklejanka +=kod +" ";
+    cout << "Podaj miejscowosc: ";
+    cin >> miejscowosc;
+    sklejanka +=miejscowosc +" ";
+    cout << "Podaj kraj: ";
+    cin >> kraj;
+    sklejanka +=kraj +" ";
+    cout << "Podaj ulice: ";
+    cin >> ulica;
+    sklejanka += ulica+" ";
+    cout << "Podaj numer: ";
+    cin >> numer;
+    sklejanka += numer+" ";
+    return sklejanka;
+}
 int main()
 {
     int wybor = 0;
     vector <string> adresowaBazaDanych;
-    string sklejanka;
     string powtorzyc = "tak";
-    string imie;
-    string nazwisko;
-    string kod;      // przy wywolaniu zmienic na int?
-    string miejscowosc;
-    string kraj;
-    string ulica;
-    string numer;    // przy wywolaniu zmienic na int?
     string liczbaUruchomien;
     ifstream liczba{ "uruchomienia.txt" };
     ofstream liczbaOPlus1{ "uruchomieniaO1Plus.txt" };
@@ -61,7 +86,9 @@ int main()
 
                 switch (wybor) {
                 case 1:
-                     
+                    adresowaBazaDanych.push_back(dopisz(wybor));
+                    cout << endl << "Otworzyc ponownie wybor? tak/nie" << endl;
+                    cin >> powtorzyc;
                     if(powtorzyc=="nie")
                     {
                         exit(0);
@@ -86,7 +113,10 @@ int main()
                     }
                     break;
                 case 4:
-                    cout << 4 << endl;
+                    for (int i = 0; i < adresowaBazaDanych.size(); i++)
+                    {
+                        cout << i + 1 << " " << adresowaBazaDanych[i] << endl;
+                    }
                     cout << "Otworzyc ponownie wybor? tak/nie" << endl;
                     cin >> powtorzyc;
                     if (powtorzyc == "nie")
