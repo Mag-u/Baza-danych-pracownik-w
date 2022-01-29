@@ -37,9 +37,87 @@ string dopisz(int iTakNiePotrzbny)
     sklejanka += numer+" ";
     return sklejanka;
 }
+
+string korektaDanych(vector <string> dane, int cyfra)
+{
+    int wybor = 0;
+    string cosJeszczeZmienic = "tak";
+    string sklejanka;
+    string kopiaVectoru;
+    string pomoc;
+    string koncowy;
+    vector <string> ulepszonyVector;
+    kopiaVectoru = dane[cyfra-1];
+    for (int i = 0; i < kopiaVectoru.length(); i++)
+    {
+        if (kopiaVectoru[i] != ' ')
+        {
+            pomoc += kopiaVectoru[i];
+        }
+        else {
+            ulepszonyVector.push_back(pomoc);
+            pomoc = "";
+        }
+    }
+    dane.push_back(pomoc);
+    string imie = ulepszonyVector[0];
+    string nazwisko = ulepszonyVector[1];
+    string kod = ulepszonyVector[2];
+    string miejscowosc = ulepszonyVector[3];
+    string kraj = ulepszonyVector[3];
+    string ulica = ulepszonyVector[4];
+    string numer = ulepszonyVector[5];
+
+        cout << "Ktore dane chcesz zmienic? ";
+        cout << "1. imie";
+        cout << "2. nazwisko";
+        cout << "3. kod";
+        cout << "4. miejscowosc";
+        cout << "5. kraj";
+        cout << "6. ulica";
+        cout << "7. numer";
+        cin >> wybor;
+        system("CLS");
+        switch (wybor)
+        {
+        case 1:
+            cout << "Podaj nowe imie " << endl;
+            cin >> imie;          
+            break;
+        case 2:
+            cout << "Podaj nowe nazwisko " << endl;
+            cin >> nazwisko;
+            break;
+        case 3:            
+            cout << "Podaj nowy kod" << endl;
+            cin >> kod;
+            break;
+        case 4:
+            cout << "Podaj nowa miejscowosc " << endl;
+            cin >> miejscowosc;
+            break;
+        case 5:
+            cout << "Podaj nowy kraj" << endl;
+            cin >> kraj;
+            break;
+          case 6:
+              cout << "Podaj nowa ulice " << endl;
+              cin >> ulica;
+            break;
+        case 7:
+            cout << "Podaj nowy numer" << endl;
+            cin >> numer;
+            break;
+
+        }
+    /*}*/
+    koncowy = imie + " " + nazwisko + " " + kod + " " + miejscowosc + " " + kraj + " " + ulica + " " + numer;
+    return koncowy;
+}
 int main()
 {
     int wybor = 0;
+    int numerDanych = 0;
     vector <string> adresowaBazaDanych;
     string powtorzyc = "tak";
     string liczbaUruchomien;
@@ -95,7 +173,9 @@ int main()
                     }
                     break;
                 case 2:
-                    cout << 2 << endl;
+                    cout << "Podaj numer danych ktory chcesz zmienic: ";
+                    cin >> numerDanych;
+                    korektaDanych(adresowaBazaDanych, numerDanych);
                     cout << "Otworzyc ponownie wybor? tak/nie" << endl;
                     cin >> powtorzyc;
                     if (powtorzyc == "nie")
