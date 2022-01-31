@@ -281,7 +281,6 @@ int main()
 
             default:
                 cout << "Wybrales bledny numer sprobuj raz jeszcze";
-                system("CLS");
                 break;
             }
         }
