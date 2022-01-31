@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <Windows.h>
+
 using namespace std;
 void sortowanieBabelkowe(vector <string>& bazaDanych)
 {
@@ -85,8 +87,9 @@ string korektaDanych(vector <string> dane, int cyfra)
             ulepszonyVector.push_back(pomoc);
             pomoc = "";
         }
-    }
     dane.push_back(pomoc);
+    }
+  
     string imie = ulepszonyVector[0];
     string nazwisko = ulepszonyVector[1];
     string kod = ulepszonyVector[2];
@@ -161,7 +164,8 @@ int main()
     }
     liczba.close();
     liczbaOPlus1.close();
-
+    cout << "Program uruchomiono " << liczbaUruchomien << " raz" << endl << endl;
+    Sleep(1000);
     string liczbaZwiekszonaO1KtoraTerazJestPrawidlowa;
     ifstream liczbaZPlus1{ "uruchomieniaO1Plus.txt" };
     ofstream liczbaTerazNormalna{ "uruchomienia.txt" };
@@ -174,12 +178,13 @@ int main()
     }
     liczbaZPlus1.close();
     liczbaTerazNormalna.close();
+
         while (powtorzyc == "tak")
         {
             system("CLS");
 
             cout << "1. Dopisz" << endl;
-            cout << "2. Korekta" << endl;
+            cout << "2. Korekta 1 danej w danym pliku" << endl;
             cout << "3. Skasuj" << endl;
             cout << "4. Pokaz baze" << endl;
             cout << "5. Sortowanie babelkowe" << endl;
@@ -239,13 +244,13 @@ int main()
             case 5:
                 sortowanieBabelkowe(adresowaBazaDanych);
                 cout << "Sortowanie zostalo wykonane" << endl;
-                 cout << "Otworzyc ponownie wybor? tak/nie" << endl;
-                  cin >> powtorzyc;
-                  if (powtorzyc == "nie")
-                  {
-                      exit(0);
-                  }
-                  break;
+                cout << "Otworzyc ponownie wybor? tak/nie" << endl;
+                cin >> powtorzyc;
+                if (powtorzyc == "nie")
+                {
+                    exit(0);
+                }
+                break;
             case 6:
                 exit(0);
 
