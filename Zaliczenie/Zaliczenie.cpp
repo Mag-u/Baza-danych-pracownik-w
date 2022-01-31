@@ -129,7 +129,7 @@ string korektaDanych(vector <string> dane, int cyfra)
     string ulica = ulepszonyVector[5];
     string numer = ulepszonyVector[6];
 
-        cout << "Ktore dane chcesz zmienic? ";
+        cout << "Ktore dane chcesz zmienic? "<<endl;
         cout << "1. imie"<<endl;
         cout << "2. nazwisko" << endl;
         cout << "3. kod" << endl;
@@ -171,7 +171,7 @@ string korektaDanych(vector <string> dane, int cyfra)
             break;
 
         }
-    koncowy = imie + " " + nazwisko + " " + kod + " " + miejscowosc + " " + kraj + " " + ulica + " " + numer;
+    koncowy = imie + " " + nazwisko + " " + kod + " " + miejscowosc + " " + kraj + " " + ulica + " " + numer+" ";
     return koncowy;
 }
 int main()
@@ -186,9 +186,8 @@ int main()
         while (powtorzyc == "tak")
         {
             system("CLS");
-
             cout << "1. Dopisz" << endl;
-            cout << "2. Korekta 1 danej w danym pliku" << endl;
+            cout << "2. Korekta" << endl;
             cout << "3. Skasuj" << endl;
             cout << "4. Pokaz baze" << endl;
             cout << "5. Sortowanie babelkowe" << endl;
