@@ -3,8 +3,39 @@
 #include <string>
 #include <vector>
 #include <Windows.h>
-
 using namespace std;
+void plikLiczacy(int numer)
+{
+    string liczbaUruchomien;
+    ifstream liczba{ "uruchomienia.txt" };
+    ofstream liczbaOPlus1{ "uruchomieniaO1Plus.txt" };
+    if (liczba && liczbaOPlus1) {
+
+        while (getline(liczba, liczbaUruchomien))
+        {
+            int k = stoi(liczbaUruchomien);
+            int* numer = &k;
+            *numer += 1;
+            liczbaOPlus1 << *numer;
+        }
+    }
+    liczba.close();
+    liczbaOPlus1.close();
+    cout << "Program uruchomiono " << stoi(liczbaUruchomien) + 1 << " raz" << endl << endl;
+    Sleep(1000);
+    string liczbaZwiekszonaO1KtoraTerazJestPrawidlowa;
+    ifstream liczbaZPlus1{ "uruchomieniaO1Plus.txt" };
+    ofstream liczbaTerazNormalna{ "uruchomienia.txt" };
+
+    if (liczbaZPlus1 && liczbaTerazNormalna) {
+
+        while (getline(liczbaZPlus1, liczbaZwiekszonaO1KtoraTerazJestPrawidlowa)) {
+            liczbaTerazNormalna << liczbaZwiekszonaO1KtoraTerazJestPrawidlowa;
+        }
+    }
+    liczbaZPlus1.close();
+    liczbaTerazNormalna.close();
+}
 void sortowanieBabelkowe(vector <string>& bazaDanych)
 {
     string alfabetycznieLubNie;
@@ -145,40 +176,13 @@ string korektaDanych(vector <string> dane, int cyfra)
 }
 int main()
 {
+    int potrzebneDoUruchomieniaFunkcji=0;
     int wybor = 0;
     int numerDanych = 0;
     vector <string> adresowaBazaDanych;
     string kopiaKorekty;
     string powtorzyc = "tak";
-    string liczbaUruchomien;
-    ifstream liczba{ "uruchomienia.txt" };
-    ofstream liczbaOPlus1{ "uruchomieniaO1Plus.txt" };
-    if (liczba && liczbaOPlus1) {
-
-        while (getline(liczba, liczbaUruchomien))
-        {
-            int numer = stoi(liczbaUruchomien);
-            numer += 1;
-            liczbaOPlus1 << numer;
-        }
-    }
-    liczba.close();
-    liczbaOPlus1.close();
-    cout << "Program uruchomiono " << liczbaUruchomien << " raz" << endl << endl;
-    Sleep(1000);
-    string liczbaZwiekszonaO1KtoraTerazJestPrawidlowa;
-    ifstream liczbaZPlus1{ "uruchomieniaO1Plus.txt" };
-    ofstream liczbaTerazNormalna{ "uruchomienia.txt" };
-
-    if (liczbaZPlus1 && liczbaTerazNormalna) {
-
-        while (getline(liczbaZPlus1, liczbaZwiekszonaO1KtoraTerazJestPrawidlowa)) {
-            liczbaTerazNormalna << liczbaZwiekszonaO1KtoraTerazJestPrawidlowa;
-        }
-    }
-    liczbaZPlus1.close();
-    liczbaTerazNormalna.close();
-
+    plikLiczacy(potrzebneDoUruchomieniaFunkcji);
         while (powtorzyc == "tak")
         {
             system("CLS");
