@@ -4,6 +4,13 @@
 #include <vector>
 #include <Windows.h>
 using namespace std;
+void zamianaMiejscamiZWektorem(string* pierwszeDaneZBazy, string* drugieDaneZBazy)
+{
+    string temp;
+    temp = *pierwszeDaneZBazy;
+    *pierwszeDaneZBazy = *drugieDaneZBazy;
+    *drugieDaneZBazy = temp;
+}
 void plikLiczacy(int numer)
 {
     string liczbaUruchomien;
@@ -176,6 +183,8 @@ string korektaDanych(vector <string> dane, int cyfra)
 }
 int main()
 {
+    int numerPierwszy, numerDrugi;
+    string pierwszy, drugi;
     int potrzebneDoUruchomieniaFunkcji=0;
     int wybor = 0;
     int numerDanych = 0;
@@ -191,7 +200,8 @@ int main()
             cout << "3. Skasuj" << endl;
             cout << "4. Pokaz baze" << endl;
             cout << "5. Sortowanie babelkowe" << endl;
-            cout << "6. Wyjdz" << endl;
+            cout << "6. Zamiana miejscami" << endl;
+            cout << "7. Wyjdz" << endl;
             cout << "Wybierz opcje: ";
 
             cin >> wybor;
@@ -255,6 +265,18 @@ int main()
                 }
                 break;
             case 6:
+                cout << "Podaj numery danych ktore chcesz zamienic miejscami: ";
+                cin >> numerPierwszy >> numerDrugi;
+                pierwszy = adresowaBazaDanych[numerPierwszy-1];
+                drugi = adresowaBazaDanych[numerDrugi-1];
+                zamianaMiejscamiZWektorem(&pierwszy, &drugi);
+                adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerPierwszy - 1);
+                adresowaBazaDanych.insert(adresowaBazaDanych.begin() + (numerPierwszy - 1), pierwszy);
+                adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerDrugi - 1);
+                adresowaBazaDanych.insert(adresowaBazaDanych.begin() + (numerDrugi - 1), drugi);
+                cout << "Zamiana wykonana";
+                break;
+            case 7:
                 exit(0);
 
             default:
