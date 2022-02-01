@@ -4,6 +4,45 @@
 #include <vector>
 #include <Windows.h>
 using namespace std;
+void wypisz(int wyborTezNieistotnaZmienna)
+{
+    system("CLS");
+    cout << "1. Dopisz" << endl;
+    cout << "2. Korekta" << endl;
+    cout << "3. Skasuj" << endl;
+    cout << "4. Pokaz baze" << endl;
+    cout << "5. Sortowanie babelkowe" << endl;
+    cout << "6. Zamiana miejscami" << endl;
+    cout << "7. Wyjdz" << endl;
+    cout << "Wybierz opcje: ";
+}
+void zapytanieOKoniec(string koniec)
+{
+    cout << "Otworzyc ponownie wybor? tak/nie" << endl;
+    cin >> koniec;
+    if (koniec == "nie")
+    {
+        exit(0);
+    }
+}
+void usun(vector <string> &adresbazy,int numer)
+{
+    adresbazy.erase(adresbazy.begin() + numer - 1);
+}
+void usuwanieIDodawanieDoZamianyMiejsc(vector <string> &baza, int numerPierwszy, int numerDrugi, string pierwszy, string drugi)
+{
+    baza.erase(baza.begin() + numerPierwszy - 1);
+    baza.insert(baza.begin() + (numerPierwszy - 1), pierwszy);
+    baza.erase(baza.begin() + numerDrugi - 1);
+    baza.insert(baza.begin() + (numerDrugi - 1), drugi);
+}
+void wypisz(vector <string> baza)
+{
+    for (int i = 0; i < baza.size(); i++)
+    {
+        cout << i + 1 << ")" << baza[i] << endl;
+    }
+}
 void zamianaMiejscamiZWektorem(string* pierwszeDaneZBazy, string* drugieDaneZBazy)
 {
     string temp;
@@ -190,33 +229,17 @@ int main()
     int numerDanych = 0;
     vector <string> adresowaBazaDanych;
     string kopiaKorekty;
-    string powtorzyc = "tak";
+    string powtorzyc;
     plikLiczacy(potrzebneDoUruchomieniaFunkcji);
-        while (powtorzyc == "tak")
+        while (0!=1)
         {
-            system("CLS");
-            cout << "1. Dopisz" << endl;
-            cout << "2. Korekta" << endl;
-            cout << "3. Skasuj" << endl;
-            cout << "4. Pokaz baze" << endl;
-            cout << "5. Sortowanie babelkowe" << endl;
-            cout << "6. Zamiana miejscami" << endl;
-            cout << "7. Wyjdz" << endl;
-            cout << "Wybierz opcje: ";
-
+            wypisz(potrzebneDoUruchomieniaFunkcji);
             cin >> wybor;
-
             system("CLS");
-
             switch (wybor) {
             case 1:
                 adresowaBazaDanych.push_back(dopisz(wybor));
-                cout << endl << "Otworzyc ponownie wybor? tak/nie" << endl;
-                cin >> powtorzyc;
-                if (powtorzyc == "nie")
-                {
-                    exit(0);
-                }
+                zapytanieOKoniec(powtorzyc);
                 break;
             case 2:
                 cout << "Podaj numer danych ktory chcesz zmienic: ";
@@ -224,45 +247,22 @@ int main()
                 kopiaKorekty = korektaDanych(adresowaBazaDanych, numerDanych);
                 adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerDanych - 1);
                 adresowaBazaDanych.insert(adresowaBazaDanych.begin() + (numerDanych - 1), kopiaKorekty);
-                cout << "Otworzyc ponownie wybor? tak/nie" << endl;
-                cin >> powtorzyc;
-                if (powtorzyc == "nie")
-                {
-                    exit(0);
-                }
+                zapytanieOKoniec(powtorzyc);
                 break;
             case 3:
                 cout << "Podaj numer danych ktore chcesz usunac: ";
                 cin >> numerDanych;
-                adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerDanych - 1);
-                cout << "Otworzyc ponownie wybor? tak/nie" << endl;
-                cin >> powtorzyc;
-                if (powtorzyc == "nie")
-                {
-                    exit(0);
-                }
+                usun(adresowaBazaDanych,numerDanych);
+                zapytanieOKoniec(powtorzyc);
                 break;
             case 4:
-                for (int i = 0; i < adresowaBazaDanych.size(); i++)
-                {
-                    cout << i + 1 << ")" << adresowaBazaDanych[i] << endl;
-                }
-                cout << "Otworzyc ponownie wybor? tak/nie" << endl;
-                cin >> powtorzyc;
-                if (powtorzyc == "nie")
-                {
-                    exit(0);
-                }
+                wypisz(adresowaBazaDanych);
+                zapytanieOKoniec(powtorzyc);
                 break;
             case 5:
                 sortowanieBabelkowe(adresowaBazaDanych);
                 cout << "Sortowanie zostalo wykonane" << endl;
-                cout << "Otworzyc ponownie wybor? tak/nie" << endl;
-                cin >> powtorzyc;
-                if (powtorzyc == "nie")
-                {
-                    exit(0);
-                }
+                zapytanieOKoniec(powtorzyc);
                 break;
             case 6:
                 cout << "Podaj numery danych ktore chcesz zamienic miejscami: ";
@@ -270,11 +270,9 @@ int main()
                 pierwszy = adresowaBazaDanych[numerPierwszy-1];
                 drugi = adresowaBazaDanych[numerDrugi-1];
                 zamianaMiejscamiZWektorem(&pierwszy, &drugi);
-                adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerPierwszy - 1);
-                adresowaBazaDanych.insert(adresowaBazaDanych.begin() + (numerPierwszy - 1), pierwszy);
-                adresowaBazaDanych.erase(adresowaBazaDanych.begin() + numerDrugi - 1);
-                adresowaBazaDanych.insert(adresowaBazaDanych.begin() + (numerDrugi - 1), drugi);
+                usuwanieIDodawanieDoZamianyMiejsc(adresowaBazaDanych, numerPierwszy, numerDrugi, pierwszy, drugi);
                 cout << "Zamiana wykonana";
+                zapytanieOKoniec(powtorzyc);
                 break;
             case 7:
                 exit(0);
